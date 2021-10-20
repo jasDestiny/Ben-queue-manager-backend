@@ -1,16 +1,13 @@
 const mongoose=require("mongoose");
 const UserData=require("../../models/user");
 const ServiceProviderData=require("../../models/serviceprovider")
+const validator=require("../auth/validateuser");
 
 module.exports= async (req, res)=>{
     let userid=req.body.userid ;
-    let amount=req.body.money;
     let authtoken=req.body.authtoken;
 
-    let x= await UserData.findOne({
-        userid:userid,
-        authtoken:authtoken
-    });
+    let x= await validator(userid, authtoken); 
 
     if(x===null){
         res.send({

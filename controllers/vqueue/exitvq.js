@@ -1,21 +1,21 @@
 const mongoose=require("mongoose");
 const UserData=require("../../models/user");
-const ServiceProviderData=require("../../models/serviceprovider")
+const ServiceProviderData=require("../../models/serviceprovider");
+const userdata = require("../users/userdata");
+const validator=require("../auth/validateuser");
 
 module.exports= async (req, res)=>{
     let userid=req.body.userid ;
     let amount=req.body.money;
     let authtoken=req.body.authtoken;
 
-    let x= await UserData.findOne({
-        userid:userid,
-        authtoken:authtoken
-    });
+    let x= await validator(userid, authtoken);
 
     if(x===null){
         res.send({
             status:"Invalid auth credentials"
         });
+        return;
     }
 
     let y= await ServiceProviderData.findOne({
@@ -37,10 +37,17 @@ module.exports= async (req, res)=>{
         }
     }
 
-    if(pos==1){
+    if(pos==-1){
+        res.send({
+            status:"Invalid request. Not in the virtual queue"
+        });
+    }
+    else if(pos==1){
         vq.shift()
     }
+
     else{
+        await UserData.updateOne({userid:userid}, {$set:{tokens: String(parseInt(x.tokens)+1)}});
         vq.splice(pos-1, pos-1);
     }
     

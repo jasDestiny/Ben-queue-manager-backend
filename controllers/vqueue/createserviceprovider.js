@@ -3,6 +3,7 @@ const UserData=require("../../models/user");
 const ServiceProviderData=require("../../models/serviceprovider")
 const crypto= require("crypto"); 
 const tokenGen=require("../auth/tokengenerator");
+const validator=require("../auth/validateuser");
 
 let randn_bm=(v, u)=>{
     while(u === 0) u = Math.random(); //Converting [0,1) to (0,1)
@@ -19,15 +20,22 @@ module.exports=async (req, res)=>{
     let endingTime=req.body.endingTime;
     let authtoken=req.body.authtoken;
 
-    let x= await UserData.findOne({
-        userid:userid,
-        authtoken:authtoken
-    });
+    let x= await validator(userid, authtoken);
 
     if(x===null){
         res.send({
             status:"Invalid auth credentials"
         });
+        return;
+    }
+
+    let y=await ServiceProviderData.findOne({placename:placename, city:city});
+
+    if(y!==null){
+        res.send({
+            status:"Place already exists in your city, enter a different place"
+        });
+        return;
     }
 
     let crowdStats=[]
