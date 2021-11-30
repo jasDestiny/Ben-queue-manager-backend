@@ -24,3 +24,5 @@ app.post("/users/serviceproviders/closevq", require("./controllers/serviceprovid
 app.post("/users/serviceproviders/removefirst", require("./controllers/serviceprovider/removefirst"));
 
 app.listen(port, ()=>console.log(`App is running on port ${port}`)); 
+
+// testing git commit 
