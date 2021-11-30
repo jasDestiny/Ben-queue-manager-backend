@@ -7,9 +7,17 @@ const mongoose= require("./config/MongooseConnect")
 app.use(bodyParser.urlencoded({extended:true}));
 app.use(bodyParser.json());
 
+//cors
+var cors = require('cors');
+var corsOptions = {
+  origin: '*',
+  optionsSuccessStatus: 200 
+}
+app.use(cors(corsOptions));
 
-// all routes
+// routes
 app.get("/", require("./controllers/home/welcomehome"));
+app.post("/test", require("./controllers/test/test"));
 app.post("/users/signup", require("./controllers/auth/signup"));
 app.post("/users/login", require("./controllers/auth/login"));   
 app.post("/users/userdata", require("./controllers/users/userdata"));
@@ -24,5 +32,3 @@ app.post("/users/serviceproviders/closevq", require("./controllers/serviceprovid
 app.post("/users/serviceproviders/removefirst", require("./controllers/serviceprovider/removefirst"));
 
 app.listen(port, ()=>console.log(`App is running on port ${port}`)); 
-
-// testing git commit 

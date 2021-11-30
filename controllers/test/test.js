@@ -1,0 +1,1 @@
+module.exports=(req, res)=>{res.send("<h1>test route</h1>")}

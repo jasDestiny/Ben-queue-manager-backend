@@ -4,7 +4,7 @@
   "description": "Helps people with large queues",
   "main": "index.js",
   "scripts": {
-    "start": "node server.js",
+    "start": "node app.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -19,6 +19,7 @@
   "homepage": "https://github.com/jasDestiny/Ben-queue-manager-backend#readme",
   "dependencies": {
     "body-parser": "^1.19.0",
+    "cors": "^2.8.5",
     "crypto": "^1.0.1",
     "dotenv": "^10.0.0",
     "express": "^4.17.1",
