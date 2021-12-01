@@ -11,7 +11,7 @@ app.use(bodyParser.json());
 var cors = require('cors');
 var corsOptions = {
   origin: '*',
-  optionsSuccessStatus: 200 
+  methods: ["GET", "POST"]
 }
 app.use(cors(corsOptions));
 
