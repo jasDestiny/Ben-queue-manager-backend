@@ -20,7 +20,7 @@ module.exports=async (req, res)=>{
     await UserData.updateMany({userid:userid},{$set: {authtoken:tokenval}})
     res.json({
         status:"Created Successfully",
-        tokenval:tokenval
+        authtoken:tokenval
     });
     return;
 }
