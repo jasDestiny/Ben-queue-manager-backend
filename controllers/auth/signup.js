@@ -27,7 +27,9 @@ module.exports=async (req, res)=>{
         }).save();
 
         res.status(200).json({
-            status:"Created Successfully",
+            status:"200",
+            userid: userid,
+            city: city,
             tokenval:authtoken
         });
     }
