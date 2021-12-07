@@ -20,6 +20,7 @@ module.exports=async (req, res)=>{
     await UserData.updateMany({userid:userid},{$set: {authtoken:tokenval}})
     res.json({
         status:"200",
+        city: x.city,
         authtoken:tokenval
     });
     return;
