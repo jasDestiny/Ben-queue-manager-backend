@@ -26,6 +26,10 @@ const ServiceProviderSchema= new mongoose.Schema({
         type:String,
         required:[true, 'vqid is required']
     },
+    description:{
+        type:String,
+        required: true
+    },
     virtualqueue:[
         {
             userid:String

@@ -10,6 +10,7 @@ let randn_bm=(v, u)=>{
     while(v === 0) v = Math.random();
     return Math.sqrt( -2.0 * Math.log( u ) ) * Math.cos( 2.0 * Math.PI * v );
 }
+
 module.exports=async (req, res)=>{
     let userid=req.body.userid ;
     let placename=req.body.placename ;
@@ -19,6 +20,7 @@ module.exports=async (req, res)=>{
     let closingTime=req.body.closingTime;
     let endingTime=req.body.endingTime;
     let authtoken=req.body.authtoken;
+    let description= req.body.description;
 
     let x= await validator(userid, authtoken);
 
@@ -60,7 +62,8 @@ module.exports=async (req, res)=>{
         endingTime:endingTime,
         vqid:vqid,
         crowdStats:crowdStats,
-        virtualqueue:virtualqueue
+        virtualqueue:virtualqueue,
+        description:description
     }).save();
 
     res.json({

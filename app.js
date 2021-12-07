@@ -13,7 +13,7 @@ var corsOptions = {
   origin: '*',
   methods: ["GET", "POST"]
 }
-app.use(cors(corsOptions));
+app.use(cors());
 
 // routes
 app.get("/", require("./controllers/home/welcomehome"));
@@ -26,6 +26,7 @@ app.post("/users/vq/findPosition", require("./controllers/vqueue/getposition"));
 app.post("/users/vq/entervq", require("./controllers/vqueue/entervq"));
 app.post("/users/vq/exitvq", require("./controllers/vqueue/exitvq"));
 app.post("/users/vq/vqstats", require("./controllers/vqueue/vqstats"));
+app.post("/users/vq/vqcitysearch", require("./controllers/vqueue/vqueuecitysearch"));
 app.post("/users/serviceproviders/new", require("./controllers/vqueue/createserviceprovider"));
 app.post("/users/serviceproviders/findvq", require("./controllers/vqueue/finvq"));
 app.post("/users/serviceproviders/closevq", require("./controllers/serviceprovider/closevq"));

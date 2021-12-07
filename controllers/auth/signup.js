@@ -8,29 +8,31 @@ module.exports=async (req, res)=>{
     let password=crypto.createHash('md5').update(req.body.password).digest('hex');
     let usertype=req.body.usertype ;
     let city=req.body.city;
-    let authtoken= tokenGen();
     let x=await UserData.findOne({userid:userid});
-    
+    res.header("Access-Control-Allow-Origin", "*");
     if(x!==null){
-        res.json({
+        res.status(200).json({
             statuscode:"userid already exists"
-        });
-        return;
+        })
     }
-    
-    let tokenval=tokenGen();
-    await new UserData({
+    else{
+        let authtoken= tokenGen();
+        await new UserData({
         userid:userid,
         password:password,
         city:city,
         usertype:usertype,
         authtoken:authtoken,
         tokens: "0"
-    }).save();
+        }).save();
 
-    res.json({
-        status:"Created Successfully",
-        tokenval:authtoken
-    });
+        res.status(200).json({
+            status:"Created Successfully",
+            tokenval:authtoken
+        });
+    }
+
+
+    
     return;
 }
