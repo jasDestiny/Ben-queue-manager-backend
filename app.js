@@ -27,6 +27,7 @@ app.post("/users/vq/entervq", require("./controllers/vqueue/entervq"));
 app.post("/users/vq/exitvq", require("./controllers/vqueue/exitvq"));
 app.post("/users/vq/vqstats", require("./controllers/vqueue/vqstats"));
 app.post("/users/vq/vqcitysearch", require("./controllers/vqueue/vqueuecitysearch"));
+app.post("/users/vq/allcities", require("./controllers/vqueue/allcities"));
 app.post("/users/serviceproviders/new", require("./controllers/vqueue/createserviceprovider"));
 app.post("/users/serviceproviders/findvq", require("./controllers/vqueue/finvq"));
 app.post("/users/serviceproviders/closevq", require("./controllers/serviceprovider/closevq"));
