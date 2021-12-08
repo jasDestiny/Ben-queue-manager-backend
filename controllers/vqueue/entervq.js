@@ -43,5 +43,6 @@ module.exports= async (req, res)=>{
     await ServiceProviderData.updateOne({placename:req.body.placename}, {$set:{virtualqueue: vq}});
     res.send({
         status:"Entered successfully", 
+        position: vq.length
     });
 }
